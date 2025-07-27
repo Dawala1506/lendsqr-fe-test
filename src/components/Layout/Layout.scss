@@ -1,42 +1,19 @@
-// src/components/Layout/Layout.scss
 .layout {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #fbfbfb;
 
   &__body {
     display: flex;
     flex: 1;
-    margin-top: 70px; // Height of the header
+    flex-direction: row;
   }
 
   &__main {
     flex: 1;
     padding: 30px 40px;
     overflow-y: auto;
-    width: calc(100% - 283px); // Subtract sidebar width
-    margin-left: 283px; // Sidebar width
     background-color: #fbfbfb;
-    min-height: calc(100vh - 70px); // Viewport height minus header height
-  }
-}
-
-// Responsive adjustments
-@media (max-width: 1024px) {
-  .layout {
-    &__main {
-      padding: 20px;
-      width: 100%;
-      margin-left: 0;
-    }
-  }
-}
-
-@media (max-width: 768px) {
-  .layout {
-    &__main {
-      padding: 16px;
-    }
+    min-height: calc(100vh - 70px); // Assuming header is 70px
   }
 }

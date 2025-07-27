@@ -4,12 +4,15 @@ import Header from "./Header";
 import SideNav from "./SideNav";
 import { Outlet } from "react-router-dom";
 
-const Layout = ({ activeMenuItem = "Dashboard" }) => {
+import './Layout.scss';
+
+
+const Layout = () => {
   return (
     <div className="layout">
       <Header />
       <div className="layout__body">
-        <SideNav activeItem={activeMenuItem} />
+        <SideNav />
         <main className="layout__main">
           <Outlet />
         </main>
