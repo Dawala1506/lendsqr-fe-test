@@ -44,7 +44,7 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     if (validateForm()) {
-      navigate("/styles");
+      navigate("/users");
     }
   };
 
