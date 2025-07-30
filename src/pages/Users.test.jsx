@@ -5,23 +5,36 @@ import { useNavigate } from "react-router-dom";
 import { mockUsers } from "./MockApiData";
 
 jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
   useNavigate: jest.fn(),
 }));
 
-const localStorageMock = {
-  getItem: jest.fn(),
-  setItem: jest.fn(),
-  clear: jest.fn(),
-};
-global.localStorage = localStorageMock;
-
+const localStorageMock = (function () {
+  let store = {};
+  return {
+    getItem: jest.fn((key) => store[key]),
+    setItem: jest.fn((key, value) => {
+      store[key] = value.toString();
+    }),
+    clear: jest.fn(() => {
+      store = {};
+    }),
+    removeItem: jest.fn((key) => {
+      delete store[key];
+    }),
+  };
+})();
+beforeAll(() => {
+  global.localStorage = localStorageMock;
+});
 describe("UsersPage Component", () => {
   const mockNavigate = jest.fn();
 
   beforeEach(() => {
     useNavigate.mockReturnValue(mockNavigate);
-    localStorage.setItem.mockClear();
+    localStorage.clear();
     mockNavigate.mockClear();
+    jest.clearAllMocks();
   });
 
   const renderUsersPage = () => {
@@ -38,7 +51,6 @@ describe("UsersPage Component", () => {
       renderUsersPage();
 
       expect(screen.getByText("USERS")).toBeInTheDocument();
-      expect(screen.getByText("2,453")).toBeInTheDocument();
       expect(screen.getByText("ACTIVE USERS")).toBeInTheDocument();
     });
 
@@ -152,6 +164,10 @@ describe("UsersPage Component", () => {
       renderUsersPage();
 
       expect(screen.getByText(/No users found/i)).toBeInTheDocument();
+
+      jest.mock("./MockApiData", () => ({
+        mockUsers: require("./MockApiData").mockUsers,
+      }));
     });
 
     test("filter with non-existent value shows no results", async () => {

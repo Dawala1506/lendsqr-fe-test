@@ -11,10 +11,9 @@
   z-index: 999;
   transition: transform 0.3s ease;
 
-  // Mobile styles
   @media (max-width: 768px) {
     position: fixed;
-    top: 80px; // Height of mobile header
+    top: 80px;
     left: 0;
     height: calc(100vh - 80px);
     transform: translateX(-100%);
@@ -44,7 +43,7 @@
     margin-bottom: 49px;
 
     @media (max-width: 768px) {
-      display: none; // Hide logo in mobile sidebar since it's in header
+      display: none;
     }
 
     .logo-text {
@@ -268,7 +267,6 @@
     }
   }
 
-  // Custom scrollbar
   &::-webkit-scrollbar {
     width: 6px;
   }

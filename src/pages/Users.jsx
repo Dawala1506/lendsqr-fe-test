@@ -1,4 +1,3 @@
-// src/pages/Users.jsx
 import React, { useState, useEffect, useCallback } from "react";
 
 import {
@@ -232,6 +231,23 @@ const UsersPage = ({ userId, onClose }) => {
   const [usersData, setUsersData] = useState([]);
   const [loading, setLoading] = useState(true);
   // const [error, setError] = useState(null);
+  const NoDataMessage = () => (
+    <tr className="no-data-row">
+      <td colSpan="7" className="no-data-message">
+        {filteredUsers.length === 0 && appliedFilters !== initialFilters
+          ? "No users match the filter criteria"
+          : "No users found"}
+      </td>
+    </tr>
+  );
+  const initialFilters = {
+    organization: "",
+    username: "",
+    email: "",
+    phoneNumber: "",
+    dateJoined: "",
+    status: "",
+  };
   const navigate = useNavigate();
   const [filterValues, setFilterValues] = useState({
     organization: "",
@@ -292,9 +308,11 @@ const UsersPage = ({ userId, onClose }) => {
     setFilteredUsers(filtered);
     setCurrentPage(1);
   }, [appliedFilters, usersData]);
+
   const debouncedApplyFilters = useCallback(debounce(applyFilters, 500), [
     applyFilters,
   ]);
+
   useEffect(() => {
     debouncedApplyFilters();
   }, [appliedFilters, debouncedApplyFilters]);
@@ -323,12 +341,10 @@ const UsersPage = ({ userId, onClose }) => {
     setLoading(false);
   }, []);
 
-  // Calculate pagination
   const itemsPerPage = parseInt(showItemsPerPage);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  //   const currentItems = usersData.slice(indexOfFirstItem, indexOfLastItem);
-  //   const totalPages = Math.ceil(usersData.length / itemsPerPage);
+
   const currentItems =
     filteredUsers.length > 0
       ? filteredUsers.slice(indexOfFirstItem, indexOfLastItem)
@@ -343,29 +359,51 @@ const UsersPage = ({ userId, onClose }) => {
     return <div className="loading">Loading users...</div>;
   }
 
+  const calculateStats = (users) => {
+    const totalUsers = users.length;
+    const activeUsers = users.filter((user) => user.status === "Active").length;
+    // const usersWithLoans = users.filter((user) => user.hasLoan).length;
+    // const usersWithSavings = users.filter((user) => user.hasSavings).length;
+    const usersWithLoans = users.filter(
+      (user) => user.status === "Pending" || user.status === "Blacklisted"
+    ).length;
+
+    const usersWithSavings = users.filter(
+      (user) => user.status === "Active" || user.status === "Inactive"
+    ).length;
+
+    return {
+      totalUsers: totalUsers.toLocaleString(),
+      activeUsers: activeUsers.toLocaleString(),
+      usersWithLoans: usersWithLoans.toLocaleString(),
+      usersWithSavings: usersWithSavings.toLocaleString(),
+    };
+  };
+
   const statsCards = [
     {
       icon: UsersIcon,
       title: "USERS",
-      value: "2,453",
+
+      value: calculateStats(usersData).totalUsers,
       className: "users-card",
     },
     {
       icon: ActiveUsersIcon,
       title: "ACTIVE USERS",
-      value: "2,453",
+      value: calculateStats(usersData).activeUsers,
       className: "active-users-card",
     },
     {
       icon: LoansIcon,
       title: "USERS WITH LOANS",
-      value: "12,453",
+      value: calculateStats(usersData).usersWithLoans,
       className: "loans-card",
     },
     {
       icon: SavingsIcon,
       title: "USERS WITH SAVINGS",
-      value: "102,453",
+      value: calculateStats(usersData).usersWithSavings,
       className: "savings-card",
     },
   ];
@@ -398,41 +436,10 @@ const UsersPage = ({ userId, onClose }) => {
     setActiveFilter(null);
   };
 
-  // Replace your current handleFilterChange with this:
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setInputFilters((prev) => ({ ...prev, [name]: value }));
-  };
-
-  // Replace your current handleApplyFilters with this:
   const handleApplyFilters = () => {
-    // Only update the applied filters when the Filter button is clicked
     setAppliedFilters(inputFilters);
     setActiveFilter(null);
   };
-  //   const FilterPanel = () => (
-  //     <div className="filter-panel">
-  //       {/* Filter fields same as your original */}
-  //       <div className="filter-group">
-  //         <label>Organization</label>
-  //         <select
-  //           name="organization"
-  //           value={filterValues.organization}
-  //           onChange={handleFilterChange}
-  //         >
-  //           <option value="">Select</option>
-  //           {[...new Set(usersData.map((u) => u.organization))].map((org) => (
-  //             <option key={org}>{org}</option>
-  //           ))}
-  //         </select>
-  //       </div>
-  //       {/* Username, email, date, phoneNumber, status fields */}
-  //       <div className="filter-actions">
-  //         <button onClick={handleResetFilters}>Reset</button>
-  //         <button onClick={handleApplyFilters}>Filter</button>
-  //       </div>
-  //     </div>
-  //   );
 
   const FilterPanel = () => (
     <div className="filter-panel">
@@ -440,7 +447,6 @@ const UsersPage = ({ userId, onClose }) => {
         <h3>Filter</h3>
       </div>
 
-      {/* Organization Field */}
       <div className="filter-group">
         <label>Organization</label>
         <div className="select-wrapper">
@@ -460,7 +466,6 @@ const UsersPage = ({ userId, onClose }) => {
         </div>
       </div>
 
-      {/* Username Field */}
       <div className="filter-group">
         <label>Username</label>
         <input
@@ -472,7 +477,6 @@ const UsersPage = ({ userId, onClose }) => {
         />
       </div>
 
-      {/* Email Field */}
       <div className="filter-group">
         <label>Email</label>
         <input
@@ -484,7 +488,6 @@ const UsersPage = ({ userId, onClose }) => {
         />
       </div>
 
-      {/* Date Field */}
       <div className="filter-group">
         <label>Date</label>
         <div className="input-wrapper">
@@ -499,7 +502,6 @@ const UsersPage = ({ userId, onClose }) => {
         </div>
       </div>
 
-      {/* Phone Number Field */}
       <div className="filter-group">
         <label>Phone Number</label>
         <input
@@ -511,7 +513,6 @@ const UsersPage = ({ userId, onClose }) => {
         />
       </div>
 
-      {/* Status Field */}
       <div className="filter-group">
         <label>Status</label>
         <div className="select-wrapper">
@@ -530,7 +531,6 @@ const UsersPage = ({ userId, onClose }) => {
         </div>
       </div>
 
-      {/* Action Buttons */}
       <div className="filter-actions">
         <button className="reset-btn" onClick={handleResetFilters}>
           Reset
@@ -565,10 +565,8 @@ const UsersPage = ({ userId, onClose }) => {
 
   return (
     <div className="users-page">
-      {/* Page Title */}
       <h1 className="page-title">Users</h1>
 
-      {/* Stats Cards */}
       <div className="stats-grid">
         {statsCards.map((card, index) => {
           const IconComponent = card.icon;
@@ -586,7 +584,6 @@ const UsersPage = ({ userId, onClose }) => {
         })}
       </div>
 
-      {/* Table Container */}
       <div className="table-container">
         <div className="table-wrapper">
           <table className="users-table">
@@ -626,7 +623,6 @@ const UsersPage = ({ userId, onClose }) => {
                     </div>
                   </div>
                 </th>
-                {/* Repeat for other columns */}
                 <th>
                   <div className="header-cell">
                     <span>USERNAME</span>
@@ -790,7 +786,6 @@ const UsersPage = ({ userId, onClose }) => {
           </table>
         </div>
 
-        {/* Pagination */}
         <div className="pagination-container">
           <div className="pagination-info">
             <span>Showing</span>
@@ -798,7 +793,7 @@ const UsersPage = ({ userId, onClose }) => {
               value={showItemsPerPage}
               onChange={(e) => {
                 setShowItemsPerPage(e.target.value);
-                setCurrentPage(1); // Reset to first page when changing items per page
+                setCurrentPage(1);
               }}
               className="items-select"
             >
@@ -808,7 +803,6 @@ const UsersPage = ({ userId, onClose }) => {
               <option value="25">25</option>
               <option value="100">100</option>
             </select>
-            {/* <span>out of {usersData.length}</span> */}
             <span>
               out of{" "}
               {filteredUsers.length > 0
@@ -826,7 +820,6 @@ const UsersPage = ({ userId, onClose }) => {
               &lt;
             </button>
 
-            {/* Dynamic pagination numbers */}
             {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
               let pageNum;
               if (totalPages <= 5) {

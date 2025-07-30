@@ -44,8 +44,7 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     if (validateForm()) {
-      // For now, just navigate to dashboard
-      navigate("/dashboard");
+      navigate("/styles");
     }
   };
 

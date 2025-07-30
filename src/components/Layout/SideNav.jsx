@@ -1,4 +1,3 @@
-// src/components/Layout/SideNav.jsx
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
@@ -29,7 +28,6 @@ const SideNav = () => {
   const menuItems = [
     { icon: Home, label: "Dashboard", category: null, path: "/dashboard" },
 
-    // CUSTOMERS
     { icon: Users, label: "Users", category: "CUSTOMERS", path: "/users" },
     {
       icon: UserCheck,
@@ -54,7 +52,6 @@ const SideNav = () => {
     { icon: UserX, label: "Whitelist", category: null, path: "/whitelist" },
     { icon: Target, label: "Karma", category: null, path: "/karma" },
 
-    // BUSINESSES
     {
       icon: Building,
       label: "Organization",
@@ -100,7 +97,6 @@ const SideNav = () => {
     },
     { icon: BarChart3, label: "Reports", category: null, path: "/reports" },
 
-    // SETTINGS
     {
       icon: Settings,
       label: "Preferences",
@@ -121,15 +117,11 @@ const SideNav = () => {
     },
   ];
 
-  // Function to determine if a menu item is active
   const isItemActive = (path) => {
     if (!path) return false;
 
-    // Exact match for root path
     if (path === "/" && location.pathname === "/") return true;
 
-    // Check if current path starts with the menu item path
-    // Also handle cases where path might be a substring of another path
     return (
       location.pathname.startsWith(path) &&
       (path === "/" ||
@@ -151,7 +143,6 @@ const SideNav = () => {
   return (
     <aside className="sidenav">
       <div className="sidenav__container">
-        {/* Switch Organization */}
         <div className="sidenav__organization">
           <div className="sidenav__organization-dropdown">
             <Building className="icon" />
@@ -160,7 +151,6 @@ const SideNav = () => {
           </div>
         </div>
 
-        {/* Navigation Menu */}
         <nav className="sidenav__nav">
           {menuItems.map((item, index) => {
             const Icon = item.icon;
@@ -185,7 +175,6 @@ const SideNav = () => {
           })}
         </nav>
 
-        {/* Logout */}
         <div className="sidenav__logout">
           <div className="logout-link" onClick={handleLogout}>
             <LogOut className="logout-icon" />

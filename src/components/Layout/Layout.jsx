@@ -1,11 +1,9 @@
-// src/components/Layout/Layout.jsx
 import React from "react";
 import Header from "./Header";
 import SideNav from "./SideNav";
 import { Outlet } from "react-router-dom";
 
-import './Layout.scss';
-
+import "./Layout.scss";
 
 const Layout = () => {
   return (

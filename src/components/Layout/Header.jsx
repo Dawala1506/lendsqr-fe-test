@@ -1,4 +1,3 @@
-// Header.jsx - Updated with mobile menu button
 import React from "react";
 import { Search, Bell, ChevronDown, Menu } from "lucide-react";
 import "./Header.scss";
@@ -7,17 +6,14 @@ const Header = ({ onMobileMenuToggle, isMobileMenuOpen }) => {
   return (
     <header className="header">
       <div className="header__container">
-        {/* Mobile Menu Button */}
         <div className="header__mobile-menu" onClick={onMobileMenuToggle}>
           <Menu className="menu-icon" />
         </div>
 
-        {/* Logo */}
         <div className="header__logo">
           <div className="logo-text">lendsqr</div>
         </div>
 
-        {/* Search Bar */}
         <div className="header__search">
           <div className="header__search-container">
             <input
@@ -31,7 +27,6 @@ const Header = ({ onMobileMenuToggle, isMobileMenuOpen }) => {
           </div>
         </div>
 
-        {/* Right Section */}
         <div className="header__right">
           <a href="#" className="docs-link">
             Docs

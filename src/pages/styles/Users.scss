@@ -1,8 +1,6 @@
-// src/pages/Users.scss
-
 .users-page {
   //   padding: 30px 40px;
-  background-color: transparent; // Let Layout handle background
+  background-color: transparent;
   width: 100%;
   max-width: 100%;
   height: 100%;
@@ -16,7 +14,6 @@
     font-family: "Work Sans", sans-serif;
   }
 
-  // Stats Cards Section
   .stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -59,7 +56,6 @@
     }
   }
 
-  // Table Section
   .table-container {
     background: #ffffff;
     border-radius: 4px;
@@ -74,6 +70,21 @@
     .users-table {
       width: 100%;
       border-collapse: collapse;
+      @media (max-width: 1200px) {
+        min-width: 900px;
+      }
+
+      @media (max-width: 992px) {
+        min-width: 950px;
+      }
+
+      @media (max-width: 768px) {
+        min-width: 1000px;
+      }
+
+      @media (max-width: 576px) {
+        min-width: 1050px;
+      }
 
       thead {
         background-color: #ffffff;
@@ -84,6 +95,11 @@
           text-align: left;
           border-bottom: 1px solid #f3f3f7;
           white-space: nowrap;
+
+          @media (max-width: 768px) {
+            padding: 12px 8px;
+            min-width: 100px;
+          }
 
           .header-cell {
             display: flex;
@@ -96,6 +112,10 @@
               color: #545f7d;
               text-transform: uppercase;
               letter-spacing: 0.04em;
+
+              @media (max-width: 768px) {
+                font-size: 11px;
+              }
             }
 
             .filter-icon {
@@ -125,6 +145,12 @@
             color: #545f7d;
             vertical-align: middle;
 
+            @media (max-width: 768px) {
+              padding: 12px 8px;
+              font-size: 13px;
+              min-width: 100px;
+            }
+
             .status-badge {
               display: inline-flex;
               align-items: center;
@@ -135,6 +161,12 @@
               font-weight: 400;
               text-transform: capitalize;
               min-width: 80px;
+
+              @media (max-width: 768px) {
+                padding: 4px 8px;
+                min-width: 60px;
+                font-size: 11px;
+              }
 
               &.status-active {
                 background: rgba(57, 205, 98, 0.06);
@@ -169,6 +201,10 @@
                 color: #545f7d;
                 transition: all 0.2s ease;
 
+                @media (max-width: 768px) {
+                  padding: 4px;
+                }
+
                 &:hover {
                   background-color: #f3f3f7;
                 }
@@ -198,6 +234,10 @@
                   padding: 8px 0;
                   min-width: 180px;
 
+                  @media (max-width: 768px) {
+                    min-width: 140px;
+                  }
+
                   .dropdown-item {
                     display: flex;
                     align-items: center;
@@ -210,6 +250,12 @@
                     color: #545f7d;
                     cursor: pointer;
                     transition: background-color 0.2s ease;
+
+                    @media (max-width: 768px) {
+                      padding: 8px 12px;
+                      font-size: 12px;
+                      gap: 8px;
+                    }
 
                     &:hover {
                       background-color: #f9fafb;
@@ -232,12 +278,24 @@
       border-top: 1px solid #f3f3f7;
       background-color: #ffffff;
 
+      @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        padding: 15px;
+      }
+
       .pagination-info {
         display: flex;
         align-items: center;
         gap: 8px;
         font-size: 14px;
         color: #545f7d;
+
+        @media (max-width: 768px) {
+          font-size: 13px;
+          justify-content: center;
+        }
 
         .items-select {
           padding: 8px 12px;
@@ -247,6 +305,11 @@
           font-size: 14px;
           color: #545f7d;
           cursor: pointer;
+
+          @media (max-width: 768px) {
+            padding: 5px 8px;
+            font-size: 13px;
+          }
 
           &:focus {
             outline: none;
@@ -274,6 +337,12 @@
           border-radius: 2px;
           transition: all 0.2s ease;
 
+          @media (max-width: 768px) {
+            width: 26px;
+            height: 26px;
+            font-size: 13px;
+          }
+
           &:hover:not(:disabled) {
             background-color: #f9fafb;
             border-color: #b0b7c3;
@@ -295,13 +364,15 @@
           padding: 0 8px;
           color: #667085;
           font-size: 14px;
+          @media (max-width: 768px) {
+            font-size: 13px;
+          }
         }
       }
     }
   }
 }
 
-// Responsive Design
 @media (max-width: 1024px) {
   .users-page {
     padding: 20px;
@@ -357,7 +428,6 @@
   }
 }
 
-// Add to your existing Users.scss
 .filter-container {
   position: relative;
   display: inline-block;
@@ -377,7 +447,6 @@
   }
 }
 
-// Filter Panel Styles
 .filter-panel {
   position: absolute;
   top: 100%;
@@ -546,7 +615,6 @@
   }
 }
 
-// Optional: Add animation for filter panel appearance
 .filter-panel {
   animation: filterPanelSlideIn 0.2s ease-out;
 }
@@ -577,12 +645,11 @@
 }
 
 @media (max-width: 768px) {
-  /* Table Responsive Styles */
   .table-wrapper {
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch; // Smooth scrolling on iOS
-    margin: 0 -1rem; // Negative margin to utilize full width
-    padding: 0 1rem; // Padding to compensate for negative margin
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -1rem;
+    padding: 0 1rem;
 
     @media (min-width: 769px) {
       margin: 0;
@@ -593,9 +660,8 @@
 
   .users-table {
     width: 100%;
-    min-width: 700px; // Minimum width before scrolling kicks in
+    min-width: 700px;
 
-    // Table header styles for mobile
     thead {
       @media (max-width: 768px) {
         tr {
@@ -604,7 +670,7 @@
         }
 
         th {
-          flex: 1 0 120px; // Flexible columns with minimum width
+          flex: 1 0 120px;
           min-width: 120px;
           padding: 12px 8px;
 
@@ -621,7 +687,6 @@
       }
     }
 
-    // Table body styles for mobile
     tbody {
       @media (max-width: 768px) {
         tr {
@@ -632,19 +697,17 @@
         }
 
         td {
-          flex: 1 0 120px; // Match header column sizing
+          flex: 1 0 120px;
           min-width: 120px;
           padding: 12px 8px;
           font-size: 13px;
 
-          // Special treatment for status badges
           .status-badge {
             padding: 6px 8px;
             min-width: 60px;
             font-size: 11px;
           }
 
-          // Action cell styling
           &:last-child {
             flex: 0 0 60px;
             min-width: 60px;
@@ -654,7 +717,6 @@
     }
   }
 
-  // Pagination responsiveness
   .pagination-container {
     @media (max-width: 768px) {
       flex-direction: column;
@@ -674,14 +736,12 @@
     }
   }
 
-  // Filter panel responsiveness
   .filter-panel {
     @media (max-width: 480px) {
       width: 280px;
       left: 0;
       transform: translateX(0);
 
-      // For filters in the first columns
       &.left-align {
         left: auto;
         right: 0;

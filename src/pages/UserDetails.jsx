@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { ArrowLeft, Star } from "lucide-react";
 import "./styles/UserDetails.scss";
@@ -25,7 +25,6 @@ const UserDetails = () => {
   if (selectedUser) {
     user = JSON.parse(selectedUser);
   } else {
-    // Fallback: search in usersList
     const usersList = JSON.parse(localStorage.getItem("usersList") || "[]");
     user = usersList.find((u) => String(u.id) === String(id));
   }
@@ -79,7 +78,6 @@ const UserDetails = () => {
           </div>
         </div>
       </div>
-      {/* Header */}
       <div className="header-profile">
         <div className="header-content">
           <div className="user-info">
@@ -110,7 +108,6 @@ const UserDetails = () => {
         </div>
       </div>
 
-      {/* Tabs section */}
       <div className="tabs">
         <ul className="tab-list">
           {tabs.map((tab) => (
@@ -125,9 +122,7 @@ const UserDetails = () => {
         </ul>
       </div>
 
-      {/* Content */}
       <div className="content">
-        {/* Personal Information */}
         <div className="section">
           <h3 className="section-title">Personal Information</h3>
           <div className="info-grid personal-grid">
@@ -176,7 +171,6 @@ const UserDetails = () => {
           </div>
         </div>
 
-        {/* Education and Employment */}
         <div className="section">
           <h3 className="section-title">Education and Employment</h3>
           <div className="info-grid employment-grid">
@@ -225,7 +219,6 @@ const UserDetails = () => {
           </div>
         </div>
 
-        {/* Socials */}
         <div className="section">
           <h3 className="section-title">Socials</h3>
           <div className="info-grid socials-grid ">
@@ -244,7 +237,6 @@ const UserDetails = () => {
           </div>
         </div>
 
-        {/* Guarantor */}
         <div className="section guarantor-section">
           <h3 className="section-title">Guarantor</h3>
           <div className="info-grid guarantor-grid">

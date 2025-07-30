@@ -1,4 +1,3 @@
-// AppRoutes.jsx
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "../components/Layout/Layout";
@@ -13,20 +12,16 @@ const AppRoutes = () => {
   return (
     <Router>
       <Routes>
-        {/* Public routes */}
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
 
-        {/* Protected routes */}
         <Route element={<Layout />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/users" element={<Users />} />
           <Route path="/users/:id" element={<UserDetails />} />
           <Route path="/guarantors" element={<Profile />} />
+          <Route path="*" element={<div>404 Not Found</div>} />
         </Route>
-
-        {/* Global fallback */}
-        <Route path="*" element={<div>404 Not Found</div>} />
       </Routes>
     </Router>
   );
