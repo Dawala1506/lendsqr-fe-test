@@ -1,3 +1,4 @@
+// Layout.scss - Main layout styles with mobile responsiveness
 .layout {
   display: flex;
   flex-direction: column;
@@ -7,6 +8,7 @@
     display: flex;
     flex: 1;
     flex-direction: row;
+    position: relative;
   }
 
   &__main {
@@ -14,6 +16,41 @@
     padding: 30px 40px;
     overflow-y: auto;
     background-color: #fbfbfb;
-    min-height: calc(100vh - 70px); // Assuming header is 70px
+    min-height: calc(100vh - 70px);
+    transition: margin-left 0.3s ease;
+
+    // Mobile responsive padding
+    @media (max-width: 768px) {
+      padding: 20px 16px;
+      min-height: calc(100vh - 80px);
+      margin-left: 0; // Reset any margin when sidebar is hidden
+    }
+
+    @media (max-width: 480px) {
+      padding: 16px 12px;
+    }
+  }
+
+  // Mobile overlay for sidebar
+  &__overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+
+    &.active {
+      display: block;
+      opacity: 1;
+    }
+
+    @media (min-width: 769px) {
+      display: none !important;
+    }
   }
 }

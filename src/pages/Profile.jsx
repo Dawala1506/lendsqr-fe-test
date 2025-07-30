@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Filter, MoreVertical, Eye, UserX, UserPlus } from "lucide-react";
-import "./Users.scss";
+import "./styles/Users.scss";
 const Profile = () => {
   const [showItemsPerPage, setShowItemsPerPage] = useState("100");
   const [currentPage, setCurrentPage] = useState(1);

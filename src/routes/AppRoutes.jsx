@@ -6,7 +6,8 @@ import Dashboard from "../pages/Dashboard";
 import Users from "../pages/Users";
 import Profile from "../pages/Profile";
 import Login from "../pages/Login";
-import NotFound from "../pages/NotFound"; // Optional component
+import NotFound from "../pages/NotFound";
+import UserDetails from "../pages/UserDetails";
 
 const AppRoutes = () => {
   return (
@@ -20,6 +21,7 @@ const AppRoutes = () => {
         <Route element={<Layout />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/users" element={<Users />} />
+          <Route path="/users/:id" element={<UserDetails />} />
           <Route path="/guarantors" element={<Profile />} />
         </Route>
 

@@ -1,6 +1,6 @@
 // src/components/Layout/SideNav.jsx
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   Home,
   Users,
@@ -21,11 +21,10 @@ import {
   ChevronDown,
 } from "lucide-react";
 import "./SideNav.scss";
-// import "../styling";
 
-
-const SideNav = ({ activeItem = "Users" }) => {
+const SideNav = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const menuItems = [
     { icon: Home, label: "Dashboard", category: null, path: "/dashboard" },
@@ -122,6 +121,23 @@ const SideNav = ({ activeItem = "Users" }) => {
     },
   ];
 
+  // Function to determine if a menu item is active
+  const isItemActive = (path) => {
+    if (!path) return false;
+
+    // Exact match for root path
+    if (path === "/" && location.pathname === "/") return true;
+
+    // Check if current path starts with the menu item path
+    // Also handle cases where path might be a substring of another path
+    return (
+      location.pathname.startsWith(path) &&
+      (path === "/" ||
+        location.pathname === path ||
+        location.pathname.startsWith(path + "/"))
+    );
+  };
+
   const handleNavigation = (path) => {
     if (path) {
       navigate(path);
@@ -135,11 +151,6 @@ const SideNav = ({ activeItem = "Users" }) => {
   return (
     <aside className="sidenav">
       <div className="sidenav__container">
-        {/* Logo */}
-        {/* <div className="sidenav__logo">
-          <div className="logo-text">lendsqr</div>
-        </div> */}
-
         {/* Switch Organization */}
         <div className="sidenav__organization">
           <div className="sidenav__organization-dropdown">
@@ -153,14 +164,14 @@ const SideNav = ({ activeItem = "Users" }) => {
         <nav className="sidenav__nav">
           {menuItems.map((item, index) => {
             const Icon = item.icon;
-            const isActive = item.label === activeItem;
+            const active = isItemActive(item.path);
 
             return (
               <div key={index}>
                 {item.category && (
                   <div className="nav-category">{item.category}</div>
                 )}
-                <div className={`nav-item ${isActive ? "active" : ""}`}>
+                <div className={`nav-item ${active ? "active" : ""}`}>
                   <button
                     className="nav-link"
                     onClick={() => handleNavigation(item.path)}

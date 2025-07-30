@@ -1,215 +1,51 @@
-// // // src/components/Layout/SideNav.scss
-// .sidenav {
-//   width: 283px;
-//   background: #fff;
-//   border-right: 1px solid #f5f5f5;
-//   height: 100vh;
-//   overflow-y: auto;
-//   font-family: "Work Sans", sans-serif;
-
-//   &__container {
-//     padding: 30px 0;
-//   }
-
-//   &__logo {
-//     padding: 0 30px;
-//     margin-bottom: 49px;
-
-//     .logo-text {
-//       font-size: 24px;
-//       font-weight: 700;
-//       color: #213f7d;
-//       font-family: inherit;
-//     }
-//   }
-
-//   &__organization {
-//     padding: 0 30px;
-//     margin-bottom: 40px;
-
-//     &-dropdown {
-//       display: flex;
-//       align-items: center;
-//       gap: 8px;
-//       cursor: pointer;
-//       transition: color 0.2s ease;
-
-//       &:hover {
-//         color: #39cdcc;
-//       }
-
-//       .icon {
-//         width: 16px;
-//         height: 16px;
-//         color: #213f7d;
-//       }
-
-//       .text {
-//         font-size: 16px;
-//         font-weight: 400;
-//         color: #213f7d;
-//         flex: 1;
-//       }
-
-//       .dropdown-icon {
-//         width: 14px;
-//         height: 8px;
-//         color: #213f7d;
-//       }
-//     }
-//   }
-
-//   &__nav {
-//     .nav-item {
-//       position: relative;
-
-//       &.active {
-//         background: linear-gradient(
-//           90deg,
-//           rgba(57, 205, 204, 0.06) 0%,
-//           rgba(57, 205, 204, 0.06) 100%
-//         );
-//         border-left: 3px solid #39cdcc;
-
-//         .nav-link {
-//           color: #39cdcc;
-//           font-weight: 600;
-//         }
-
-//         .nav-icon {
-//           color: #39cdcc;
-//         }
-//       }
-
-//       .nav-link {
-//         display: flex;
-//         align-items: center;
-//         padding: 12px 30px;
-//         text-decoration: none;
-//         transition: all 0.2s ease;
-//         border: none;
-//         background: none;
-//         width: 100%;
-//         cursor: pointer;
-
-//         &:hover {
-//           background: rgba(57, 205, 204, 0.03);
-//           color: #39cdcc;
-
-//           .nav-icon {
-//             color: #39cdcc;
-//           }
-//         }
-
-//         .nav-icon {
-//           width: 16px;
-//           height: 16px;
-//           margin-right: 10px;
-//           color: #545f7d;
-//           opacity: 0.9;
-//           transition: color 0.2s ease;
-//         }
-
-//         .nav-text {
-//           font-size: 16px;
-//           font-weight: 400;
-//           color: #213f7d;
-//           opacity: 0.8;
-//           transition: all 0.2s ease;
-//         }
-//       }
-//     }
-
-//     .nav-category {
-//       padding: 24px 30px 8px 30px;
-//       font-size: 12px;
-//       font-weight: 500;
-//       color: #545f7d;
-//       text-transform: uppercase;
-//       letter-spacing: 0.1em;
-//       opacity: 0.8;
-//       margin-top: 8px;
-
-//       &:first-child {
-//         margin-top: 0;
-//       }
-//     }
-//   }
-
-//   &__logout {
-//     margin-top: 32px;
-//     padding: 0 30px;
-//     border-top: 1px solid #f5f5f5;
-//     padding-top: 24px;
-
-//     .logout-link {
-//       display: flex;
-//       align-items: center;
-//       padding: 12px 0;
-//       text-decoration: none;
-//       transition: color 0.2s ease;
-//       cursor: pointer;
-
-//       &:hover {
-//         color: #39cdcc;
-
-//         .logout-icon {
-//           color: #39cdcc;
-//         }
-//       }
-
-//       .logout-icon {
-//         width: 16px;
-//         height: 16px;
-//         margin-right: 10px;
-//         color: #545f7d;
-//         transition: color 0.2s ease;
-//       }
-
-//       .logout-text {
-//         font-size: 16px;
-//         font-weight: 400;
-//         color: #213f7d;
-//         opacity: 0.8;
-//       }
-//     }
-//   }
-
-//   // Custom scrollbar
-//   &::-webkit-scrollbar {
-//     width: 6px;
-//   }
-
-//   &::-webkit-scrollbar-track {
-//     background: #f1f1f1;
-//   }
-
-//   &::-webkit-scrollbar-thumb {
-//     background: #c1c1c1;
-//     border-radius: 3px;
-
-//     &:hover {
-//       background: #a8a8a8;
-//     }
-//   }
-// }
 .sidenav {
   width: 283px;
-  min-width: 283px;        // ✅ Prevent shrinking in flex layout
-  flex-shrink: 0;          // ✅ Maintain width in flex container
+  min-width: 283px;
+  flex-shrink: 0;
   background: #fff;
   border-right: 1px solid #f5f5f5;
-  height: 100vh;
+  height: 100%;
   overflow-y: auto;
   font-family: "Work Sans", sans-serif;
+  position: relative;
+  z-index: 999;
+  transition: transform 0.3s ease;
+
+  // Mobile styles
+  @media (max-width: 768px) {
+    position: fixed;
+    top: 80px; // Height of mobile header
+    left: 0;
+    height: calc(100vh - 80px);
+    transform: translateX(-100%);
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+
+    &.mobile-open {
+      transform: translateX(0);
+    }
+  }
+
+  @media (max-width: 480px) {
+    width: 280px;
+    min-width: 280px;
+  }
 
   &__container {
     padding: 30px 0;
+    background: #fff;
+
+    @media (max-width: 768px) {
+      padding: 20px 0;
+    }
   }
 
   &__logo {
     padding: 0 30px;
     margin-bottom: 49px;
+
+    @media (max-width: 768px) {
+      display: none; // Hide logo in mobile sidebar since it's in header
+    }
 
     .logo-text {
       font-size: 24px;
@@ -222,6 +58,11 @@
   &__organization {
     padding: 0 30px;
     margin-bottom: 40px;
+
+    @media (max-width: 768px) {
+      padding: 0 20px;
+      margin-bottom: 30px;
+    }
 
     &-dropdown {
       display: flex;
@@ -245,11 +86,15 @@
         font-weight: 400;
         color: #213f7d;
         flex: 1;
+
+        @media (max-width: 480px) {
+          font-size: 14px;
+        }
       }
 
       .dropdown-icon {
-        width: 14px;
-        height: 8px;
+        width: 20px;
+        height: 20px;
         color: #213f7d;
       }
     }
@@ -288,6 +133,14 @@
         width: 100%;
         cursor: pointer;
 
+        @media (max-width: 768px) {
+          padding: 12px 20px;
+        }
+
+        @media (max-width: 480px) {
+          padding: 10px 16px;
+        }
+
         &:hover {
           background: rgba(57, 205, 204, 0.03);
           color: #39cdcc;
@@ -304,6 +157,12 @@
           color: #545f7d;
           opacity: 0.9;
           transition: color 0.2s ease;
+
+          @media (max-width: 480px) {
+            width: 14px;
+            height: 14px;
+            margin-right: 8px;
+          }
         }
 
         .nav-text {
@@ -312,6 +171,10 @@
           color: #213f7d;
           opacity: 0.8;
           transition: all 0.2s ease;
+
+          @media (max-width: 480px) {
+            font-size: 14px;
+          }
         }
       }
     }
@@ -326,6 +189,16 @@
       opacity: 0.8;
       margin-top: 8px;
 
+      @media (max-width: 768px) {
+        padding: 20px 20px 6px 20px;
+        font-size: 11px;
+      }
+
+      @media (max-width: 480px) {
+        padding: 16px 16px 6px 16px;
+        font-size: 10px;
+      }
+
       &:first-child {
         margin-top: 0;
       }
@@ -338,6 +211,16 @@
     border-top: 1px solid #f5f5f5;
     padding-top: 24px;
 
+    @media (max-width: 768px) {
+      padding: 20px 20px 0 20px;
+      margin-top: 24px;
+    }
+
+    @media (max-width: 480px) {
+      padding: 16px 16px 0 16px;
+      margin-top: 20px;
+    }
+
     .logout-link {
       display: flex;
       align-items: center;
@@ -345,6 +228,10 @@
       text-decoration: none;
       transition: color 0.2s ease;
       cursor: pointer;
+
+      @media (max-width: 480px) {
+        padding: 10px 0;
+      }
 
       &:hover {
         color: #39cdcc;
@@ -360,6 +247,12 @@
         margin-right: 10px;
         color: #545f7d;
         transition: color 0.2s ease;
+
+        @media (max-width: 480px) {
+          width: 14px;
+          height: 14px;
+          margin-right: 8px;
+        }
       }
 
       .logout-text {
@@ -367,6 +260,10 @@
         font-weight: 400;
         color: #213f7d;
         opacity: 0.8;
+
+        @media (max-width: 480px) {
+          font-size: 14px;
+        }
       }
     }
   }
@@ -389,11 +286,3 @@
     }
   }
 }
-
-.sidenav {
-  background-color: #eee; // Light gray
-}
-.layout__main {
-  background-color: #fff; // White
-}
-

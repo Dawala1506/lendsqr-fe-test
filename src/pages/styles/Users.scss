@@ -1,7 +1,7 @@
 // src/pages/Users.scss
 
 .users-page {
-  padding: 30px 40px;
+  //   padding: 30px 40px;
   background-color: transparent; // Let Layout handle background
   width: 100%;
   max-width: 100%;
@@ -27,8 +27,8 @@
       background: #ffffff;
       border: 1px solid #e5e7eb;
       border-radius: 4px;
-      padding: 30px 26px;
-      box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+      padding: 10px 20px;
+      //   box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
 
       .stat-icon {
         margin-bottom: 14px;
@@ -67,9 +67,9 @@
     border: 1px solid #e5e7eb;
     overflow: hidden;
 
-    .table-wrapper {
-      overflow-x: auto;
-    }
+    // .table-wrapper {
+    //   overflow-x: auto;
+    // }
 
     .users-table {
       width: 100%;
@@ -77,11 +77,13 @@
 
       thead {
         background-color: #ffffff;
+        white-space: nowrap;
 
         th {
           padding: 20px 18px;
           text-align: left;
           border-bottom: 1px solid #f3f3f7;
+          white-space: nowrap;
 
           .header-cell {
             display: flex;
@@ -350,6 +352,340 @@
       thead th,
       tbody td {
         padding: 12px 8px;
+      }
+    }
+  }
+}
+
+// Add to your existing Users.scss
+.filter-container {
+  position: relative;
+  display: inline-block;
+
+  .filter-icon {
+    color: #545f7d;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: all 0.2s ease;
+    margin-left: 8px;
+
+    &:hover,
+    &.active {
+      opacity: 1;
+      color: #39cdcc;
+    }
+  }
+}
+
+// Filter Panel Styles
+.filter-panel {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  background: #ffffff;
+  border: 1px solid #e0e7ff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 24px;
+  width: 280px;
+  margin-top: 8px;
+
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+    h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #213f7d;
+      margin: 0;
+    }
+  }
+}
+
+.filter-group {
+  margin-bottom: 16px;
+
+  label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #545f7d;
+    margin-bottom: 8px;
+  }
+
+  input {
+    width: 100%;
+    padding: 12px 2px;
+    border: 1px solid #dce7f7;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #545f7d;
+    background: #ffffff;
+    transition: all 0.2s ease;
+
+    &:focus {
+      outline: none;
+      border-color: #39cdcc;
+      box-shadow: 0 0 0 3px rgba(57, 205, 204, 0.1);
+    }
+
+    &::placeholder {
+      color: #bfc8d9;
+    }
+
+    &[type="date"] {
+      color: #bfc8d9;
+
+      &::-webkit-calendar-picker-indicator {
+        opacity: 0;
+        position: absolute;
+        right: 12px;
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+      }
+    }
+  }
+
+  select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #dce7f7;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #bfc8d9;
+    background: #ffffff;
+    appearance: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:focus {
+      outline: none;
+      border-color: #39cdcc;
+      box-shadow: 0 0 0 3px rgba(57, 205, 204, 0.1);
+      color: #545f7d;
+    }
+
+    option {
+      color: #545f7d;
+    }
+  }
+}
+
+.select-wrapper,
+.input-wrapper {
+  position: relative;
+
+  .select-icon,
+  .input-icon {
+    position: absolute;
+
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    color: #bfc8d9;
+    pointer-events: none;
+  }
+}
+
+.filter-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+
+  button {
+    flex: 1;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .reset-btn {
+    background: #ffffff;
+    border: 1px solid #545f7d;
+    color: #545f7d;
+
+    &:hover {
+      background: #f8fafc;
+      border-color: #39cdcc;
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 3px rgba(84, 95, 125, 0.1);
+    }
+  }
+
+  .filter-btn {
+    background: #39cdcc;
+    color: #ffffff;
+    border: 1px solid #39cdcc;
+
+    &:hover {
+      background: #2bb5b3;
+      border-color: #2bb5b3;
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 3px rgba(57, 205, 204, 0.2);
+    }
+  }
+}
+
+// Optional: Add animation for filter panel appearance
+.filter-panel {
+  animation: filterPanelSlideIn 0.2s ease-out;
+}
+
+@keyframes filterPanelSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.loading {
+  padding: 2rem;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #213f7d;
+}
+
+.error {
+  padding: 2rem;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #e4033b;
+}
+
+@media (max-width: 768px) {
+  /* Table Responsive Styles */
+  .table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; // Smooth scrolling on iOS
+    margin: 0 -1rem; // Negative margin to utilize full width
+    padding: 0 1rem; // Padding to compensate for negative margin
+
+    @media (min-width: 769px) {
+      margin: 0;
+      padding: 0;
+      overflow-x: visible;
+    }
+  }
+
+  .users-table {
+    width: 100%;
+    min-width: 700px; // Minimum width before scrolling kicks in
+
+    // Table header styles for mobile
+    thead {
+      @media (max-width: 768px) {
+        tr {
+          display: flex;
+          flex-wrap: wrap;
+        }
+
+        th {
+          flex: 1 0 120px; // Flexible columns with minimum width
+          min-width: 120px;
+          padding: 12px 8px;
+
+          .header-cell {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 4px;
+
+            span {
+              font-size: 11px;
+            }
+          }
+        }
+      }
+    }
+
+    // Table body styles for mobile
+    tbody {
+      @media (max-width: 768px) {
+        tr {
+          display: flex;
+          flex-wrap: wrap;
+          border-bottom: 1px solid #f3f3f7;
+          padding: 8px 0;
+        }
+
+        td {
+          flex: 1 0 120px; // Match header column sizing
+          min-width: 120px;
+          padding: 12px 8px;
+          font-size: 13px;
+
+          // Special treatment for status badges
+          .status-badge {
+            padding: 6px 8px;
+            min-width: 60px;
+            font-size: 11px;
+          }
+
+          // Action cell styling
+          &:last-child {
+            flex: 0 0 60px;
+            min-width: 60px;
+          }
+        }
+      }
+    }
+  }
+
+  // Pagination responsiveness
+  .pagination-container {
+    @media (max-width: 768px) {
+      flex-direction: column;
+      gap: 16px;
+      padding: 16px;
+
+      .pagination-info {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+      }
+
+      .pagination-controls {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+  }
+
+  // Filter panel responsiveness
+  .filter-panel {
+    @media (max-width: 480px) {
+      width: 280px;
+      left: 0;
+      transform: translateX(0);
+
+      // For filters in the first columns
+      &.left-align {
+        left: auto;
+        right: 0;
+        transform: translateX(0);
       }
     }
   }

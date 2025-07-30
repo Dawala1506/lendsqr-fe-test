@@ -1,12 +1,17 @@
-// src/components/Layout/Header.jsx
+// Header.jsx - Updated with mobile menu button
 import React from "react";
-import { Search, Bell, ChevronDown } from "lucide-react";
+import { Search, Bell, ChevronDown, Menu } from "lucide-react";
 import "./Header.scss";
 
-const Header = () => {
+const Header = ({ onMobileMenuToggle, isMobileMenuOpen }) => {
   return (
     <header className="header">
       <div className="header__container">
+        {/* Mobile Menu Button */}
+        <div className="header__mobile-menu" onClick={onMobileMenuToggle}>
+          <Menu className="menu-icon" />
+        </div>
+
         {/* Logo */}
         <div className="header__logo">
           <div className="logo-text">lendsqr</div>
