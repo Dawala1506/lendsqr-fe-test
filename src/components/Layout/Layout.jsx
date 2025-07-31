@@ -3,7 +3,7 @@ import Header from "./Header";
 import SideNav from "./SideNav";
 import { Outlet } from "react-router-dom";
 
-import "./Layout.scss";
+import "./styles/Layout.scss";
 
 const Layout = () => {
   return (

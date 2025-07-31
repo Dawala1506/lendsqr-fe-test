@@ -19,7 +19,7 @@ import {
   LogOut,
   ChevronDown,
 } from "lucide-react";
-import "./SideNav.scss";
+import "./styles/SideNav.scss";
 
 const SideNav = () => {
   const navigate = useNavigate();

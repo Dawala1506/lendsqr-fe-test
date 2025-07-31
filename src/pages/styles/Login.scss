@@ -67,10 +67,12 @@
     flex: 1;
     background: #ffffff;
     border-left: 1px solid #fff;
-    padding: 80px;
+    padding: 50px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    max-width: 600px; // Add max-width for larger screens
+    margin: 0 auto;
 
     h1 {
       font-size: 2rem;
@@ -87,6 +89,7 @@
 
     form {
       text-align: left;
+      max-width: 400px;
     }
 
     .form-group {
@@ -192,6 +195,10 @@
 
     .login-left {
       display: none;
+    }
+
+    .login-logo {
+      width: 120px; /* Slightly smaller logo for mobile */
     }
 
     .login-right {

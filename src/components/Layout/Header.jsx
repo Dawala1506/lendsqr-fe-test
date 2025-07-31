@@ -1,6 +1,6 @@
 import React from "react";
 import { Search, Bell, ChevronDown, Menu } from "lucide-react";
-import "./Header.scss";
+import "./styles/Header.scss";
 
 const Header = ({ onMobileMenuToggle, isMobileMenuOpen }) => {
   return (

@@ -1,70 +1,82 @@
-# Getting Started with Create React App
+---
+##  Features
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- ✅ **Login Authentication** with local validation
+- 📊 **Dashboard Overview** with metrics and summaries
+- 👥 **User Management**
+  - View paginated list of 500 mock users
+  - Filter by organization, status, gender, etc.
+- 🔍 **User Detail Page**
+  - Fetches details from mock API
+  - Stores user info in **localStorage** or **IndexedDB**
+- 📱 **Mobile Responsive Design**
+- ⚙️ Clean and scalable component structure
+---
 
-## Available Scripts
+## Technologies Used
 
-In the project directory, you can run:
+- **React** (v18+)
+- **React Router** for routing
+- **SCSS** for styling
+- **Axios / Fetch** for API calls
+- **LocalStorage / IndexedDB** for persistence
+- **Vite / Create React App** (based on setup)
+- **Mock API** (JSON Server / faker)
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 📦 Setup & Installation
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Prerequisites
 
-### `npm test`
+- Node.js (v16 or higher)
+- Git
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Installation Steps
 
-### `npm run build`
+1. **Clone the Repository**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+   ```bash
+   git clone https://github.com/Dawala1506/lendsqr-fe-test.git
+   cd lendsqr-fe-test
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. Install Dependencies
 
-### `npm run eject`
+bash
+Copy
+Edit
+npm install
+Run Mock API
+You can use JSON Server:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+bash
+Copy
+Edit
+npm install -g json-server
+json-server --watch db.json --port 5000
+Ensure your src/utils/api.js points to the correct mock API base URL:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+js
+Copy
+Edit
+export const BASE_URL = 'http://localhost:5000';
+Start Development Server
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+bash
+Copy
+Edit
+npm start
+Visit in browser
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+arduino
+Copy
+Edit
+http://localhost:3000
 
-## Learn More
+3.  Mock Data
+    The project uses a mock API with 500 user records generated using Faker.js. The data is stored in db.json or pulled dynamically from a script and served using JSON Server.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+4.  Responsive Design
+    The UI is fully responsive using modern Flexbox and Grid layouts to adapt to all screen sizes from mobile to desktop.
